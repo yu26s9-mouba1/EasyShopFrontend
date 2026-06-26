@@ -202,8 +202,11 @@ class ShoppingCartService {
                 templateBuilder.append("message", data, "errors");
             })
             .catch(error => {
+                console.log("Checkout error:", error);
+                console.log("Response:", error.response);
+
                 const data = {
-                    error: "Checkout failed."
+                    error: error.response?.data?.message || error.response?.data?.error || "Checkout failed."
                 };
 
                 templateBuilder.append("error", data, "errors");
